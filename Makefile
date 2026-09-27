@@ -1,6 +1,6 @@
 
-CFLAGS += -no-pie -L/usr/lib -lm -ldl -lpng -lcrypto -lz \
-	-Iincludes
+CFLAGS += -no-pie -Iincludes
+LDLIBS += -lm -ldl -lpng -lcrypto -lz
 
 OBJS += libxpwn/8900.o
 OBJS += libxpwn/ibootim.o
@@ -17,7 +17,7 @@ OBJS += mk8900image.o
 	$(CC) $(CFLAGS) -c $< -o $@
 
 mk8900image: $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS)$(LIBRARIES) -o $@
+	$(CC) $(CFLAGS) $(OBJS) -o $@ $(LDLIBS)
 
 clean:
 	@rm -f $(OBJS)
